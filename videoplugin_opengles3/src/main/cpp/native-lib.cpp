@@ -45,28 +45,9 @@ void release_env(void) {
 
 extern "C"
 {
-    void runMessageMe(){
-        ehome_printf("Static function is Start");
-        JNIEnv *env;
-        if (!get_env(&env)) {
-            ehome_printf("[%s]get_env error!\n", __FUNCTION__);
-            return;
-        }
-        ehome_printf("[%s]GetVersion=%d\n", __FUNCTION__, env->GetVersion());
-
-        jclass clazz = env->FindClass("com/pvr/videoplugin/VideoPlugin");
-        jmethodID messageMe = env->GetStaticMethodID(clazz, "runJavaFunction", "()V");
-        env->CallStaticVoidMethod(clazz, messageMe);
-
-        jmethodID mt = env->GetMethodID(clazz, "runMemberFunc", "()V");
-        env->CallVoidMethod(g_obj, mt);
-
-        release_env();
-    }
-
     void start(int unityTextureId, int width, int height)
     {
-        ehome_printf("Start function is start");
+        ehome_printf("start function is start");
         JNIEnv *env;
         if (!get_env(&env)) {
             ehome_printf("[%s]get_env error!\n", __FUNCTION__);
@@ -80,6 +61,42 @@ extern "C"
 
         release_env();
         ehome_printf("start function is end");
+    }
+
+    void release()
+    {
+        ehome_printf("release function is start");
+        JNIEnv *env;
+        if (!get_env(&env)) {
+            ehome_printf("[%s]get_env error!\n", __FUNCTION__);
+            return;
+        }
+        ehome_printf("[%s]GetVersion=%d\n", __FUNCTION__, env->GetVersion());
+
+        jclass clazz = env->FindClass("com/pvr/videoplugin/VideoPlugin");
+        jmethodID mt = env->GetMethodID(clazz, "release", "()V");
+        env->CallVoidMethod(g_obj, mt);
+
+        release_env();
+        ehome_printf("release function is end");
+    }
+
+    void updateTexture()
+    {
+        ehome_printf("updateTexture function is start");
+        JNIEnv *env;
+        if (!get_env(&env)) {
+            ehome_printf("[%s]get_env error!\n", __FUNCTION__);
+            return;
+        }
+        ehome_printf("[%s]GetVersion=%d\n", __FUNCTION__, env->GetVersion());
+
+        jclass clazz = env->FindClass("com/pvr/videoplugin/VideoPlugin");
+        jmethodID mt = env->GetMethodID(clazz, "updateTexture", "()V");
+        env->CallVoidMethod(g_obj, mt);
+
+        release_env();
+        ehome_printf("updateTexture function is end");
     }
 }
 
