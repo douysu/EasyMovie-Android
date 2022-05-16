@@ -14,6 +14,10 @@ import java.io.IOException;
 
 public class VideoPlugin implements OnFrameAvailableListener {
 
+    static {
+        System.loadLibrary("application");
+    }
+
     private final Activity mActivity;
     private SurfaceTexture mSurfaceTexture;
     private Surface mSurface;
@@ -104,4 +108,6 @@ public class VideoPlugin implements OnFrameAvailableListener {
         return mIsUpdateFrame;
     }
 
+    // native function
+    public native void testRun();
 }
