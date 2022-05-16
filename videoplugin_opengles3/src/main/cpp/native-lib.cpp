@@ -58,6 +58,11 @@ extern "C"
         jmethodID messageMe = env->GetStaticMethodID(clazz, "runJavaFunction", "()V");
         env->CallStaticVoidMethod(clazz, messageMe);
 
+        ehome_printf("Function is run");
+        jmethodID mt = env->GetMethodID(clazz, "runMemberFunc", "()V");
+        env->CallVoidMethod(g_obj, mt);
+        ehome_printf("Function is end");
+
         ehome_printf("Release env start");
         release_env();
         ehome_printf("Release env end");
@@ -68,6 +73,6 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_pvr_videoplugin_VideoPlugin_initObject(
         JNIEnv* env,
 jobject obj) {
-    ehome_printf("yindouyindou");
-    g_obj = obj;
+    ehome_printf("InitObject Function is run");
+    g_obj = env->NewGlobalRef(obj);
 }
