@@ -63,6 +63,24 @@ extern "C"
 
         release_env();
     }
+
+    void start(int unityTextureId, int width, int height)
+    {
+        ehome_printf("Start function is start");
+        JNIEnv *env;
+        if (!get_env(&env)) {
+            ehome_printf("[%s]get_env error!\n", __FUNCTION__);
+            return;
+        }
+        ehome_printf("[%s]GetVersion=%d\n", __FUNCTION__, env->GetVersion());
+
+        jclass clazz = env->FindClass("com/pvr/videoplugin/VideoPlugin");
+        jmethodID mt = env->GetMethodID(clazz, "start", "(III)V");
+        env->CallVoidMethod(g_obj, mt, unityTextureId, width, height);
+
+        release_env();
+        ehome_printf("start function is end");
+    }
 }
 
 extern "C" JNIEXPORT void JNICALL
