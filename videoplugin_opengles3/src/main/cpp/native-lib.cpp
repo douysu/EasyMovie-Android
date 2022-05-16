@@ -65,8 +65,9 @@ extern "C"
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_pvr_videoplugin_VideoPlugin_testRun(
+Java_com_pvr_videoplugin_VideoPlugin_initObject(
         JNIEnv* env,
 jobject obj) {
     ehome_printf("yindouyindou");
+    g_obj = obj;
 }
