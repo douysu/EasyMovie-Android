@@ -58,14 +58,10 @@ extern "C"
         jmethodID messageMe = env->GetStaticMethodID(clazz, "runJavaFunction", "()V");
         env->CallStaticVoidMethod(clazz, messageMe);
 
-        ehome_printf("Function is run");
         jmethodID mt = env->GetMethodID(clazz, "runMemberFunc", "()V");
         env->CallVoidMethod(g_obj, mt);
-        ehome_printf("Function is end");
 
-        ehome_printf("Release env start");
         release_env();
-        ehome_printf("Release env end");
     }
 }
 
