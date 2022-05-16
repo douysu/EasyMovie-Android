@@ -34,7 +34,7 @@ bool get_env(JNIEnv ** env) {
 void release_env(void) {
     JNIEnv *env ;
     int status = ms2_vm->GetEnv((void**)&env, JNI_VERSION_1_4);
-    if (status == JNI_OK) {
+    if (status == JNI_EDETACHED) {
         ehome_printf("[%s]getpid=%d, gettid=%d\n", __FUNCTION__, getpid(),gettid());
         ms2_vm->DetachCurrentThread();
         ehome_printf("Release success");
@@ -55,7 +55,6 @@ extern "C"
         ehome_printf("[%s]GetVersion=%d\n", __FUNCTION__, env->GetVersion());
 
         jclass clazz = env->FindClass("com/pvr/videoplugin/VideoPlugin");
-
         jmethodID messageMe = env->GetStaticMethodID(clazz, "runJavaFunction", "()V");
         env->CallStaticVoidMethod(clazz, messageMe);
 
