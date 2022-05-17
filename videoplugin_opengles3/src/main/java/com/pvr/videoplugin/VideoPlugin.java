@@ -108,16 +108,6 @@ public class VideoPlugin implements OnFrameAvailableListener {
         return mIsUpdateFrame;
     }
 
-    public static void runJavaFunction()
-    {
-        System.out.println("This is a static java function");
-    }
-
-    public void runMemberFunc()
-    {
-        System.out.println("This is a java function");
-    }
-
     // native function
     public native void initObject();
 }

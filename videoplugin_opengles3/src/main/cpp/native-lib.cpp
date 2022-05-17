@@ -49,6 +49,7 @@ extern "C"
     {
         ehome_printf("start function is start");
         JNIEnv *env;
+        ehome_printf("get env start");
         if (!get_env(&env)) {
             ehome_printf("[%s]get_env error!\n", __FUNCTION__);
             return;
@@ -59,7 +60,7 @@ extern "C"
         jmethodID mt = env->GetMethodID(clazz, "start", "(III)V");
         env->CallVoidMethod(g_obj, mt, unityTextureId, width, height);
 
-        release_env();
+        // release_env();
         ehome_printf("start function is end");
     }
 
@@ -77,7 +78,7 @@ extern "C"
         jmethodID mt = env->GetMethodID(clazz, "release", "()V");
         env->CallVoidMethod(g_obj, mt);
 
-        release_env();
+        // release_env();
         ehome_printf("release function is end");
     }
 
@@ -95,7 +96,7 @@ extern "C"
         jmethodID mt = env->GetMethodID(clazz, "updateTexture", "()V");
         env->CallVoidMethod(g_obj, mt);
 
-        release_env();
+        // release_env();
         ehome_printf("updateTexture function is end");
     }
 }
