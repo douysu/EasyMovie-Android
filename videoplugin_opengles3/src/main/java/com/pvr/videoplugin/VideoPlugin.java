@@ -14,10 +14,6 @@ import java.io.IOException;
 
 public class VideoPlugin implements OnFrameAvailableListener {
 
-    static {
-        System.loadLibrary("application");
-    }
-
     private final Activity mActivity;
     private SurfaceTexture mSurfaceTexture;
     private Surface mSurface;
@@ -26,7 +22,9 @@ public class VideoPlugin implements OnFrameAvailableListener {
     private boolean mIsUpdateFrame;
 
     public VideoPlugin(Activity activity) {
+        FBOUtils.log("VideoPlugin is start");
         mActivity = activity;
+        FBOUtils.log("VideoPlugin is end");
     }
 
     public void start(int unityTextureId, int width, int height) {
@@ -110,4 +108,13 @@ public class VideoPlugin implements OnFrameAvailableListener {
 
     // native function
     public native void initObject();
+
+    static {
+        System.loadLibrary("application");
+    }
+
+//    public static void loadLib() {
+//        System.loadLibrary("application");
+//        FBOUtils.log("Lod .so end");
+//    }
 }
