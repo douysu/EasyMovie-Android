@@ -22,7 +22,6 @@ public class VideoPlugin implements OnFrameAvailableListener {
     private boolean mIsUpdateFrame;
 
     public VideoPlugin(Activity activity) {
-        FBOUtils.log("VideoPlugin is start");
         mActivity = activity;
         FBOUtils.log("VideoPlugin is end");
     }
@@ -71,10 +70,8 @@ public class VideoPlugin implements OnFrameAvailableListener {
         mMediaPlayer.setSurface(mSurface);
         try {
             AssetFileDescriptor fd = mActivity.getAssets().openFd("test.mp4");
-//            final File file = new File("/sdcard/test.mp4");
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setLooping(true);
-//            mMediaPlayer.setDataSource(Uri.fromFile(file).toString());
             mMediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
             mMediaPlayer.prepareAsync();
         } catch (IOException e) {
@@ -107,14 +104,10 @@ public class VideoPlugin implements OnFrameAvailableListener {
     }
 
     // native function
-    public native void initObject();
+    public native void init();
 
     static {
         System.loadLibrary("application");
     }
 
-//    public static void loadLib() {
-//        System.loadLibrary("application");
-//        FBOUtils.log("Lod .so end");
-//    }
 }
